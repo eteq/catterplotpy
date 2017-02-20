@@ -63,10 +63,13 @@ def catter(x, y, s=40, c=None, cat='rand', alpha=1, ax=None, cmap=None):
         s = np.ones(len(x))*s
     # otherwise assume shapes match
 
-    if cat=='rand':
+    if cat in ('rand', 'random'):
         cats = np.random.randint(n_cats(), size=len(x))
     else:
-        cats = np.ones(len(x)) * cat
+        try:
+            cats = np.ones(len(x)) * cat
+        except TypeError as e:
+            raise TypeError('`cat` argument needs to be "random", a scalar, or match the input.', e)
 
     ims = []
     for xi, yi, si, ci, cati in zip(x, y, s, rgba, cats):
