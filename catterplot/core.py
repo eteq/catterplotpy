@@ -1,4 +1,5 @@
 from __future__ import absolute_import, division, print_function, unicode_literals  # just in case, for py2 to be py3-ish
+import pkgutil, io
 
 import numpy as np
 
@@ -8,8 +9,8 @@ from matplotlib import pyplot as plt
 __all__ = ['get_cat_num', 'n_cats', 'catter']
 
 
-_CAT_DATA = np.load('data/cats.npy') # N x 72 x 72, 0 is transparent, 1 is full-cat
-
+ # N_cats x 72 x 72, 0 is transparent, 1 is full-cat
+_CAT_DATA = np.load(io.BytesIO(pkgutil.get_data('catterplot', 'data/cats.npy')))
 
 def get_cat_num(i):
     return _CAT_DATA[i]
