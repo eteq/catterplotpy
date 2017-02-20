@@ -1,1 +1,7 @@
-Catter plot (https://github.com/Gibbsdavidl/CatterPlots)... now in Python!
+# catterplotpy
+
+Catter plots... now in Python!
+
+This work was inspired in large part by
+[David Gibbs' R catterplot](https://github.com/Gibbsdavidl/CatterPlots). The
+cat shapes are directly derived from that work.
