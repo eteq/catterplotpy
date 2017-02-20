@@ -35,13 +35,17 @@ def n_cats():
     return len(_CAT_DATA)
 
 
-def catter(x, y, s=40, c=None, cat='rand', alpha=1, ax=None, cmap=None):
+def catter(x, y, s=40, c=None, cat='random', alpha=1, ax=None, cmap=None):
     """
-    ``scatter`` args are interpreted the same.  Additional kwargs include:
+    A catter plot (scatter plot with cats).  Most arguments are interpreted
+    the same as the matplotlib `scatter` function.  Additional kwargs include:
 
     ``cat`` can be:
-    * a number: the index of the cat symbol
-    * 'rand' : random cats
+    * int : the index of the cat symbol to use - you can use
+      ``catterplot.n_cats()`` to get the number of cats available
+    * a squence of ints : must match the data, but otherwise interpreted as for
+      a scalar
+    * 'random'/'rand' : random cats
 
     ``ax`` can be:
     * None: use the current default (pyplot) axes
