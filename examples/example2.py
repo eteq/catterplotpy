@@ -10,7 +10,7 @@ np.random.seed(12345)
 x, y = np.random.randn(2, 50)
 sizes = np.random.rand(len(x))*10+20
 
-catterplot.catter(x, y, s=sizes, cat='random')
+catterplot.catter(x, y, s=sizes, cat='random', aspects=1)
 
 plt.xlim(-3, 3)
 plt.ylim(-3, 3)

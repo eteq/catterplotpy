@@ -35,10 +35,12 @@ def n_cats():
     return len(_CAT_DATA)
 
 
-def catter(x, y, s=40, c=None, cat='random', alpha=1, ax=None, cmap=None):
+def catter(x, y, s=40, c=None, cat='random', alpha=1, ax=None, cmap=None,
+           aspects='auto'):
     """
     A catter plot (scatter plot with cats).  Most arguments are interpreted
-    the same as the matplotlib `scatter` function.  Additional kwargs include:
+    the same as the matplotlib `scatter` function, except that ``s`` is the
+    *data* size of the symbol (not pixel).  Additional kwargs include:
 
     ``cat`` can be:
     * int : the index of the cat symbol to use - you can use
@@ -50,6 +52,13 @@ def catter(x, y, s=40, c=None, cat='random', alpha=1, ax=None, cmap=None):
     ``ax`` can be:
     * None: use the current default (pyplot) axes
     * an `Axes` : random cats
+
+    ``aspects`` can be:
+    * 'auto': the cats length-to-width is set to be square given the spread of
+      inputs
+    * a float: the height/width of the cats.  If not 1, ``s`` is interpreted as
+      the geometric mean of the sizes
+    * a sequence of floats: much match data, gives height/width
     """
     if ax is None:
         ax = plt.gca()
@@ -75,12 +84,17 @@ def catter(x, y, s=40, c=None, cat='random', alpha=1, ax=None, cmap=None):
         except TypeError as e:
             raise TypeError('`cat` argument needs to be "random", a scalar, or match the input.', e)
 
+    if aspects == 'auto':
+        aspects = np.ptp(y)/np.ptp(x)
+    if np.isscalar(aspects) or aspects.shape==tuple():
+        aspects = np.ones(len(x)) * aspects
+
     ims = []
-    for xi, yi, si, ci, cati in zip(x, y, s, rgba, cats):
+    for xi, yi, si, ci, cati, aspecti in zip(x, y, s, rgba, cats, aspects):
         data = get_cat_num(cati)
 
-        offsetx = si/2/data.shape[0]
-        offsety = si/2/data.shape[1]
+        offsetx = si * aspecti**-0.5 / (2 * data.shape[0])
+        offsety = si * aspecti**0.5 / (2 * data.shape[1])
 
         im = image.AxesImage(ax, extent=(xi - offsetx, xi + offsetx,
                                          yi - offsety, yi + offsety))

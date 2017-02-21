@@ -4,6 +4,7 @@ Catter plots... now in Python!
 
 <img src="https://github.com/eteq/catterplotpy/raw/master/examples/example1.png" width="600">
 <img src="https://github.com/eteq/catterplotpy/raw/master/examples/example2.png" width="600">
+<img src="https://github.com/eteq/catterplotpy/raw/master/examples/example3.png" width="600">
 
 All you should need to do is install via ``python setup.py install`` and then:
 ```python

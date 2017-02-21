@@ -15,6 +15,6 @@ catterplot.catter(x, y1, cat=0)
 y2 = x/4 + 1
 catnums2 = np.arange(len(x)) % catterplot.n_cats()
 
-catterplot.catter(x, y2, c=x, cmap='viridis', cat=catnums2)
+catterplot.catter(x, y2, c=x, cmap='viridis', cat=catnums2, aspects=1)
 
 plt.savefig('example1.png')
